@@ -4,13 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Home = ({ usuarios,agregar,eliminar,seleccionar,actualizar,usuarioSeleccionado }) => {
+const Home = ({oscuro, usuarios,agregar,eliminar,seleccionar,actualizar,usuarioSeleccionado }) => {
 
-    const totalUsers = usuarios.length;
-    const usersmayores = usuarios.filter(user => user.age > 18);
-    const usersmenores = usuarios.filter(user => user.age < 18);
-    const percentageUsersOver25 = ((usersmayores.length / totalUsers) * 100).toFixed(2);
-    const percentageUsersmenores = ((usersmenores.length / totalUsers) * 100).toFixed(2);
+   
 
 
     // modal
@@ -42,22 +38,29 @@ const Home = ({ usuarios,agregar,eliminar,seleccionar,actualizar,usuarioSeleccio
     const navegar =()=>{
         navegacion('/grafica')
     }
+     // logica de navegacion 
 
+  const navegacionHome = useNavigate()
+  
+  const home = ()=>{
+    navegacionHome('/')
+  }
+
+
+
+    const totalUsers = usuarios?.length;
+    const usersmayores = usuarios?.filter(user => user.age > 18);
+    const usersmenores = usuarios?.filter(user => user.age < 18);
+    const percentageUsersOver25 = ((usersmayores?.length / totalUsers) * 100).toFixed(2);
+    const percentageUsersmenores = ((usersmenores?.length / totalUsers) * 100).toFixed(2);
+    console.log(totalUsers);
     return (
-        <div >
-            <div className="container-grafica">
-                <div className='grafica uno'><span className='usuario'>Usuarios Ingresados</span> <span className='num-cuatro'><i className='bx bx-user-plus '></i>  {usuarios.length}</span> </div>
-                <div className='grafica dos'><span className='usuario'>Usuarios Mayores</span> <span className='num-cuatro'>{percentageUsersOver25} %</span> </div>
-                <div className='grafica tres'><span className='usuario'>Usuarios Menores</span> <span className='num-cuatro'>{percentageUsersmenores} %</span> </div>
-
-            </div>
-            <div className='padre' >
-
-
-                <div className="hijo navbar ">
+        <div className='contenedor-padre'>
+            
+              <div className="hijo + ">
                     <nav>
                         <ul>
-                            <li><i className='bx bx-home'></i>  <span className='notranslate'>Home</span>  </li>
+                            <li onClick={home}><i className='bx bx-home'></i>  <span className='notranslate'>Home</span>  </li>
                             <li>  <i className='bx bx-user-plus '></i>  <span onClick={abrirModal} className='notranslate'>Add Users</span>
                                 {modal && (
                                     <div className='padre-modal'>
@@ -69,25 +72,25 @@ const Home = ({ usuarios,agregar,eliminar,seleccionar,actualizar,usuarioSeleccio
                                                 </div>
                                                 <div className='form-input'>
                                                     <label className='notranslate' htmlFor='last_name'>Apellidos</label>
-                                                    <input type='text' id='last_name' {...register("last_name")} />
+                                                    <input className='notranslate' type='text' id='last_name' {...register("last_name")} />
                                                 </div>
                                                 <div className='form-input'>
                                                     <label className='notranslate' htmlFor='age'>Edad</label>
-                                                    <input type='number' id='age' {...register("age")} required />
+                                                    <input className='notranslate' type='number' id='age' {...register("age")} required />
                                                 </div>
                                                 <div className='form-input'>
                                                     <label className='notranslate' htmlFor='email'>Correo</label>
-                                                    <input type='email' id='email' {...register("email")} />
+                                                    <input className='notranslate' type='email' id='email' {...register("email")} />
                                                 </div>
                                                 <div className='form-input'>
                                                     <label className='notranslate' htmlFor='movil'>Movil</label>
-                                                    <input type='number' id='movil' {...register("movil")} />
+                                                    <input className='notranslate' type='number' id='movil' {...register("movil")} />
                                                 </div>
                                                
                                                    <div className="notranslate enviar-cerrar"> 
 
                                                     <input className='notranslate enviar' type='submit'  value='Enviar' />
-                                                    <input onClick={()=>setModal(false)} className='cerrar' type='submit'  value='cerrar' />
+                                                    <input  onClick={()=>setModal(false)} className='cerrar notranslate' type='submit'  value='cerrar' />
                                                     </div>
                                                 
                                             </form>
@@ -99,42 +102,58 @@ const Home = ({ usuarios,agregar,eliminar,seleccionar,actualizar,usuarioSeleccio
                                 }
 
                             </li>
-                            <li><i class='bx bx-stats'></i>  <span onClick={navegar} className='notranslate'>Stats</span> </li>
-                            <li><i className='bx bx-moon'></i>  <span className='notranslate'>Dark</span></li>
+                            <li><i className='bx bx-stats'></i>  <span onClick={navegar} className='notranslate'>Stats</span> </li>
+                            <li><i className='bx bx-moon'></i>  <span onClick={oscuro} className='notranslate'>Dark</span></li>
                         </ul>
                     </nav>
 
                 </div>
 
+{/*  */}
+           
 
-                <div className="hijo  usuarios">
+            <div className='padre' >
+
+            <div className="container-grafica">
+                <div className='grafica uno'><span className='usuario'>Usuarios Ingresados</span> <span className='users'><i className='bx bx-user-plus '></i>  {totalUsers}</span> </div>
+                <div className='grafica dos'><span className='usuario'>Usuarios Mayores</span> <span className='users'>{percentageUsersOver25} %</span> </div>
+                <div className='grafica tres'><span className='usuario'>Usuarios Menores</span> <span className='users'>{percentageUsersmenores} %</span> </div>
+
+            </div>
+              
+
+
+                <div className="hijo  contenedor-tabla">
                     <table>
-
+                            <thead>        
                         <tr>
-                            <th>#</th>
+                            <th>#</th> 
                             <th>Nombre</th>
-                            <th>Apellìdo</th>
-                            <th>Edad</th>
+                            <th>Apellìdo</th> 
+                            <th>Edad</th> 
                             <th>Correo</th>
                             <th>Movil</th>
                             <th>Edición</th>
                         </tr>
-
+                        </thead> 
+                        <tbody> 
                         {
-                            usuarios.map(user => (
 
-                                <tr>
+                            usuarios?.map(user => (
+
+                                <tr  key={user.id}>
                                     <td>{user.id}</td>
                                     <td>{user.name}</td>
                                     <td>{user.last_name}</td>
                                     <td>{user.age}</td>
-                                    <td>{user.email}</td>
+                                    <td className='correo'>{user.email}</td>
                                     <td>{user.movil}</td>
-                                    <td> <button onClick={()=>eliminar(user.id)}>Eliminar</button> 
-                                     <button onClick={()=> {seleccionar(user);abrirModal()}}>Actualizar</button>   </td>
+                                    <td className='btn-colores'> <button className='eliminar' onClick={()=>eliminar(user.id)}>Eliminar</button> 
+                                     <button className='actualizar notranslate' onClick={()=> {seleccionar(user);abrirModal()}}>Actualizar</button>   </td>
                                 </tr>
 
                             ))}
+                            </tbody>
 
                     </table>
 
