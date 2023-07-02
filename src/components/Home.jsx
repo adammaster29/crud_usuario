@@ -12,6 +12,7 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
 
     if (usuarioSeleccionado !== null) {
       actualizar(data);
+      seleccionar(null); // Restablecer el usuario seleccionado después de actualizar
     } else {
       agregar(data);
     }
@@ -25,8 +26,10 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
       setValue("age", usuarioSeleccionado.age);
       setValue("email", usuarioSeleccionado.email);
       setValue("movil", usuarioSeleccionado.movil);
+    } else {
+      reset(); // Restablecer el formulario si no hay usuario seleccionado
     }
-  }, [usuarioSeleccionado, setValue]);
+  }, [usuarioSeleccionado, setValue, reset]);
 
   useEffect(() => {
     if (!modal) {

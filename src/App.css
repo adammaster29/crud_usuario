@@ -133,14 +133,14 @@ th {
   border: 1px solid #f5f5f5;
   text-align: center;
   margin-left: 12px;
-  background: #096c8de0;
+  /* background: #096c8de0; */
 }
 
 td {
-  background: #ffffff;
+  /* background: #ffffff; */
   color: var(--color-table);
   text-align: center;
-  background: var(--tabla);
+  /* background: var(--tabla); */
 }
 
 
