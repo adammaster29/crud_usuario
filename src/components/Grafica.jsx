@@ -1,78 +1,98 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const Grafica = ({  oscuro, usuarios }) => {
+  const totalUsers = usuarios?.length;
+  const usersmayores = usuarios?.filter(user => user.age > 18);
+  const usersmenores = usuarios?.filter(user => user.age < 18);
+  const mayor = ((usersmayores?.length / totalUsers) * 100).toFixed(2);
+  const menor = ((usersmenores?.length / totalUsers) * 100).toFixed(2);
 
-class Grafica extends Component {
-  componentDidMount() {
-    const canvas = this.canvasRef;
-    const ctx = canvas.getContext('2d');
-
-    const barWidth = 50;
-    const barHeightRatio = 4;
-
-    let x = 50;
-    let y = canvas.height - 50;
-
-    ctx.fillStyle = 'rgb(255, 0, 212)';
-    ctx.font = '12px Arial';
-
-    for (let i = 0; i < this.props.usuarios?.length; i++) {
-      const user = this.props.usuarios[i];
-      const barHeight = user.age * barHeightRatio;
-
-      ctx.fillRect(x, y - barHeight, barWidth, barHeight);
-      ctx.fillText(user.name, x, y + 15);
-
-      x += barWidth + 20;
-    }
+  const navigate = useNavigate()
+  const home = ()=>{
+    navigate('/')
   }
+  // promedio
+  const edades = usuarios?.map(user => user.age);
+  const suma = edades?.reduce((a, b) => a + b, 0);
+  const promedio = suma / edades?.length;
 
-  render() {
-    const totalUsers = this.props.usuarios?.length;
-    const usersmayores = this.props.usuarios?.filter(user => user.age > 18);
-    const usersmenores = this.props.usuarios?.filter(user => user.age < 18);
-    const percentageUsersOver25 = ((usersmayores?.length / totalUsers) * 100).toFixed(2);
-    const percentageUsersmenores = ((usersmenores?.length / totalUsers) * 100).toFixed(2);
-    
- 
-    
-    return (
+  // grafica
+  const porcentajeProgreso = (totalUsers / 100) * 100;
 
-      <div className="padre-canva">
+  return (
+    <div className='padre-grafica'>
+      <div className="menu">
+        <img src="/public/img/logo.png" alt="" />
+        <i onClick={home} class='bx bx-home-alt bx-icon-menu'></i>
+        <i onClick={oscuro} class='bx bx-moon bx-icon-menu'></i>
+      </div>
+      <div className="contenedor-dasboard">
+        <div className="dasboard uno">
+          <span className='total-users'>
+            <p className='notranslate texto user'>{totalUsers}</p>
+            <p className='notranslate txt'>Usuarios</p>
+          </span>
+          <i class='bx bxs-user'></i>
+        </div>
 
-<div className="hijo navbar home-navbar">
-            <nav>
-              <ul>
-                <li onClick={this.props.home} ><i className='bx bx-home'></i> <Link to='/' > <span className='notranslate'>Home</span> </Link>  </li>
-                <li>  <i className='bx bx-user-plus '></i>  <span className='notranslate'>Add Users</span></li>
-                <li><i class='bx bx-stats'></i>  <span className='notranslate'>Stats</span> </li>
-                <li><i className='bx bx-moon'></i>  <span onClick={this.props.oscuro} className='notranslate'>Dark</span></li>
-              </ul>
-            </nav>
-
+        <div className="dasboard tres">
+          <div className="contenedor-mayor">
+            <i class='bx bx-circle'></i>
+            <span className='mayor-users'>
+              <p className='texto notranslate'>{mayor}%</p>
+              <p className='notranslate txt'>Usuarios Mayores</p>
+            </span>
           </div>
 
+          <div className="contenedor-menor">
+            <i class='bx bx-circle b-menor'></i>
+            <span className='menor-users'>
+              <p className='texto notranslate menor-porcent'>{menor}%</p>
+              <p className='notranslate txt'>Usuarios Menores</p>
+            </span>
+          </div>
 
-        
-
-        <div className="padre user-grafica">
-
-        <div className="container-grafica stats">
-          <div className='grafica uno'><span className='usuario'>Usuarios Ingresados</span> <span className='num-cuatro'><i className='bx bx-user-plus '></i>  {this.props.usuarios?.length}</span> </div>
-          <div className='grafica dos'><span className='usuario'>Usuarios Mayores</span> <span className='num-cuatro'>{percentageUsersOver25} %</span> </div>
-          <div className='grafica tres'><span className='usuario'>Usuarios Menores</span> <span className='num-cuatro'>{percentageUsersmenores} %</span> </div>
-
+          <div className="contenedor-promedio">
+            <i class='bx bx-circle b-promedio'></i>
+            <span className='promedio'>
+              <p className='texto notranslate promedio-porcent'>
+                {promedio.toFixed(2)}%
+              </p>
+              <p className='notranslate txt'>Promedio</p>
+            </span>
+          </div>
         </div>
 
-
-          <div className="canva-grafica "> <canvas ref={(ref) => (this.canvasRef = ref)} width={600} height={400} />  </div>
-
-
+        <div className="dasboard cuatro">
+          {/* aqui va la grafica */}
+          <div
+            className='container-barra'
+            style={{
+              height: `${porcentajeProgreso}%`,
+              backgroundColor: 'blue',
+              width: '60px',
+              margin: 'auto',
+              color: 'white',
+            }}
+          >
+            {`${porcentajeProgreso.toFixed(2)}%`}
+          </div>
         </div>
 
+        <div className="dasboard cinco">
+          {usuarios?.map(persona => (
+            <ul key={persona.id} className="wrap">
+              <li className='notranslate'>Name: {persona.name}</li>
+              <li className='notranslate'>Last-name: {persona.last_name}</li>
+              <li className='notranslate'>Age: {persona.age}</li>
+              <li className='notranslate'>Email: {persona.email}</li>
+            </ul>
+          ))}
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Grafica;
