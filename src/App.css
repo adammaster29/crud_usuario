@@ -35,7 +35,7 @@
 }
 
 .App {
-  background: var(--bg-fondo-body);
+  background-image: var(--bg-fondo-body);
   width:100%;
   height:100%;
   top:0;
@@ -228,6 +228,7 @@ li{
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  border: 1px solid #8b8484;
 }
 .bx-icon-menu{
   font-size: 34px;
@@ -296,6 +297,7 @@ justify-content: space-between; */
   background: var(--bg-grid);
   border-radius:12px;
   color:var(--color-nav);
+  border: 1px solid #8b8484;
 }
 .bx-circle{
   background-color: #e813cb;

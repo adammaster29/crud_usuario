@@ -23,7 +23,7 @@ const Grafica = ({  oscuro, usuarios }) => {
   return (
     <div className='padre-grafica'>
       <div className="menu">
-        <img src="/public/img/logo.png" alt="" />
+        <img src="/img/logo.png" alt="" />
         <i onClick={home} class='bx bx-home-alt bx-icon-menu'></i>
         <i onClick={oscuro} class='bx bx-moon bx-icon-menu'></i>
       </div>
