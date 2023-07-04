@@ -20,7 +20,7 @@
 }
 
 .dark {
-  --bg-fondo-body:url(img/aurora.jpg);
+  --bg-fondo-body:url('/img/aurora.jpg');
   --color-user:rgb(255, 255, 255);
   --users:rgb(224, 211, 211);
   --tabla: rgba(6, 22, 57, 0.745);
@@ -35,7 +35,7 @@
 }
 
 .App {
-  background-image: var(--bg-fondo-body);
+  background: var(--bg-fondo-body);
   width:100%;
   height:100%;
   top:0;
@@ -219,6 +219,7 @@ li{
   padding: 0;
   margin: 0;
   height: 100%;
+background:var(--bg-fondo-body);
 }
 
 .menu{
