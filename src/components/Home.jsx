@@ -95,6 +95,12 @@ const submit = (data, e) => {
   const abrirAmburguesa = () =>{
     setmodalAmburguesa(!modalAmburguesa);
   }
+  const alerta =()=>{
+
+if (modalAmburguesa  === false) {
+  alert("Abrir Menu primero por favor")
+}
+  }
 
   return (
     <div className="contenedor-padre">
@@ -278,7 +284,7 @@ const submit = (data, e) => {
                     <i className=" bx bx-x eliminar" onClick={() => eliminar(user.id)}>
                       
                     </i>
-                    <i className="bx bx-edit actualizar notranslate" onClick={() => { seleccionar(user); abrirModal() }}>
+                    <i className="bx bx-edit actualizar notranslate" onClick={() => { seleccionar(user); abrirModal();alerta() }}>
                       
                     </i>
                   </td>
