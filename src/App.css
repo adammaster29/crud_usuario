@@ -43,6 +43,9 @@
   position: fixed;
  
 }
+.menu-amburguesa{
+  display: none;
+}
 /* body{
   background: var(--bg-body);
 } */
@@ -133,7 +136,7 @@ th {
   border: 1px solid #f5f5f5;
   text-align: center;
   margin-left: 12px;
-  /* background: #096c8de0; */
+  background: #096c8de0;
 }
 
 td {
@@ -154,15 +157,23 @@ td {
  
 }
 .eliminar {
-  background: #ff0000;
+
   color: white;
-  font-weight: 800;
+  font-size: 25px;
+  color: rgb(108, 169, 175);
 }
 .actualizar {
-  background: #2374d8;
-  color: white;
-  font-weight: 800;
+  color: rgb(108, 169, 175);
+  font-size: 25px;
 }
+.eliminar:hover {
+color: red;
+}
+.actualizar:hover{
+  color: green;
+}
+
+
 .btn-colores {
   display: flex;
   gap: 5px;

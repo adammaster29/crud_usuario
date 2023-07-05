@@ -6,18 +6,53 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
-  const submit = (data, e) => {
-    e.preventDefault();
-    data.id = Date.now();
+  // const submit = (data, e) => {
+  //   e.preventDefault();
+  //   data.id = Date.now().toString().substring(0, 2);
 
-    if (usuarioSeleccionado !== null) {
-      actualizar(data);
-      seleccionar(null); // Restablecer el usuario seleccionado después de actualizar
-    } else {
-      agregar(data);
+
+  //   if (usuarioSeleccionado !== null) {
+  //     actualizar(data);
+  //     seleccionar(null); // Restablecer el usuario seleccionado después de actualizar
+  //   } else {
+  //     agregar(data);
+  //   }
+  //   reset();
+  // };
+// Generar un identificador único de 2 caracteres
+const generateUniqueId = () => {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let id = '';
+
+  while (id.length < 2) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    const randomChar = characters[randomIndex];
+
+    if (!id.includes(randomChar)) {
+      id += randomChar;
     }
-    reset();
-  };
+  }
+
+  return id;
+};
+
+// Utilizar la función generateUniqueId() en submit()
+const submit = (data, e) => {
+  e.preventDefault();
+  data.id = generateUniqueId();
+
+  if (usuarioSeleccionado !== null) {
+    actualizar(data);
+    seleccionar(null); // Restablecer el usuario seleccionado después de actualizar
+  } else {
+    agregar(data);
+  }
+  reset();
+};
+
+
+
+
 
   useEffect(() => {
     if (usuarioSeleccionado !== null) {
@@ -55,12 +90,89 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
   const percentageUsersOver25 = ((usersmayores?.length / totalUsers) * 100).toFixed(2);
   const percentageUsersmenores = ((usersmenores?.length / totalUsers) * 100).toFixed(2);
 
+  // ****************************amburguesa*****************************
+  const[modalAmburguesa,setmodalAmburguesa] = useState(false);
+  const abrirAmburguesa = () =>{
+    setmodalAmburguesa(!modalAmburguesa);
+  }
+
   return (
     <div className="contenedor-padre">
       <div className="hijo">
         <nav>
-          <img src="img/logo.png" alt="" />
-          <ul>
+        <div className="menuResponsive">
+        <img className='logo-img' src="img/logo.png" alt="" />
+        <button onClick={abrirAmburguesa} className='menu-amburguesa'>menu</button>
+        {/* ******************************menu amburguesa********************************** */}
+        {modalAmburguesa &&(
+           <ul >
+           <li onClick={home}>
+             <i className="bx bx-home"></i>
+             <span className="notranslate">Home</span>
+           </li>
+           <li>
+             <i className="bx bx-user-plus"></i>
+             <span onClick={abrirModal} className="notranslate">
+               Add Users
+             </span>
+             {modal && (
+               <div className="padre-modal">
+                 <div className="hijo-modal">
+                   <form onSubmit={handleSubmit(submit)}>
+                     <label className="notranslate" htmlFor="name">
+                       Nombre
+                     </label>
+                     <input type="text" id="name" {...register("name")} />
+
+                     <label className="notranslate" htmlFor="last_name">
+                       Apellidos
+                     </label>
+                     <input className="notranslate" type="text" id="last_name" {...register("last_name")} />
+
+                     <label className="notranslate" htmlFor="age">
+                       Edad
+                     </label>
+                     <input className="notranslate" type="number" id="age" {...register("age")} required />
+
+                     <label className="notranslate" htmlFor="email">
+                       Correo
+                     </label>
+                     <input className="notranslate" type="email" id="email" {...register("email")} />
+
+                     <label className="notranslate" htmlFor="movil">
+                       Movil
+                     </label>
+                     <input className="notranslate" type="number" id="movil" {...register("movil")} />
+
+                     <div className="notranslate enviar-cerrar">
+                       <input className="notranslate enviar" type="submit" value="Enviar" />
+                       <input onClick={() => setModal(false)} className="cerrar notranslate" type="submit" value="Cerrar" />
+                     </div>
+                   </form>
+                 </div>
+               </div>
+             )}
+           </li>
+           <li>
+             <i className="bx bx-stats"></i>
+             <span onClick={navegar} className="notranslate">
+               Stats
+             </span>
+           </li>
+           <li>
+             <i className="bx bx-moon"></i>
+             <span onClick={oscuro} className="notranslate">
+               Dark
+             </span>
+           </li>
+         </ul>
+        )
+
+
+
+        }
+        </div>
+          <ul className='ul-nav'>
             <li onClick={home}>
               <i className="bx bx-home"></i>
               <span className="notranslate">Home</span>
@@ -150,7 +262,7 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
                 <th>Edad</th>
                 <th>Correo</th>
                 <th>Movil</th>
-                <th>Edición</th>
+                <th>Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -163,12 +275,12 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
                   <td className="correo">{user.email}</td>
                   <td>{user.movil}</td>
                   <td className="btn-colores">
-                    <button className="eliminar" onClick={() => eliminar(user.id)}>
-                      Eliminar
-                    </button>
-                    <button className="actualizar notranslate" onClick={() => { seleccionar(user); abrirModal(); }}>
-                      Actualizar
-                    </button>
+                    <i className=" bx bx-x eliminar" onClick={() => eliminar(user.id)}>
+                      
+                    </i>
+                    <i className="bx bx-edit actualizar notranslate" onClick={() => { seleccionar(user); abrirModal() }}>
+                      
+                    </i>
                   </td>
                 </tr>
               ))}
