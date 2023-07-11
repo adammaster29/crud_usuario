@@ -4,10 +4,13 @@
   .contenedor-padre{
     border: 1px solid #000;
     flex-direction: column;
+    position: none;
   }
+ .hijo{
+  height: 170px;
+ }
   nav{
     /* flex-direction: row; */
-    background: white;
     width: 100%;
     max-height: 150px;
     padding: 0;
@@ -27,23 +30,44 @@
     position: absolute;
     gap: 0;
     margin-top: -44px;
+    color: white;
+  }
+ 
+  .ul-menuAmburguesa{
+    background: rgba(255, 255, 255, 0.733);
+    display: flex;
+    min-height: 150px;
+    margin-top: 1rem;
   }
   .ul-nav{
     display: none;
   }
 
 .logo-img{
-max-height: 150px;
+/* max-height: 150px; */
  /* object-fit: cover; */
  /* position: absolute; */
- margin-top: -75px;
+ /* margin-top: -75px; */
+ background: none;
+display: none;
+}
+.menuResponsive{
+display: flex;
+justify-content: center;
+align-items: center;
+background-image: url(/img/logo.png);
+background-repeat: no-repeat;
+background-size: cover;
+background-size: 100% 100%;
+height: 150px;
+
 }
 .menu-amburguesa{
     display: flex;
+    margin-left: 82%;
     z-index: 2;
     position: relative;
-   margin-left: 85%;
-   margin-top: -140px;
+   margin-top: -110px;
    width: 50px;
    height: 30px;
    display: flex;
@@ -60,8 +84,23 @@ max-height: 150px;
     color: white;
     font-weight:800 ;
   }
+  .li-responsive{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00000098;
+    border-radius: 5px;
+  }
+  .li-responsive:hover{
+background: rgba(255, 255, 255, 0.719);
+  color: #000;
+}
 .contenedor-tabla{
     font-size: 11px;
+    margin-top: 1rem;
+    /* overflow: hidden; */
+  height: auto;
+    border: 1px solid #750d0d;
 }
 .usuario{
     font-size: 12px;
@@ -69,8 +108,18 @@ max-height: 150px;
 .users {
     font-size: 20px;
 }
+.container-grafica {
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
+  gap: 8px;
+}
 .grafica {
-    width: 31%;
+    width: 100%;
     height:80px ;
 }
+
+
+
 }

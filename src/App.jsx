@@ -3,7 +3,6 @@ import {  useEffect, useState } from 'react'
 import './App.css'
 import './Responsive.css'
 import Home from './components/Home'
-import Grafica from './components/Grafica'
 import {
   HashRouter,
   Routes,
@@ -96,8 +95,6 @@ const home = ()=>{
          <HashRouter>
       <Routes>
         <Route path="/" element={ <Home setModal={setModal} modal={modal} abrirModal={abrirModal} oscuro={oscuro} actualizar={actualizar} usuarioSeleccionado={usuarioSeleccionado} seleccionar={seleccionar} eliminar={eliminar} agregar={agregar} usuarios={usuarios}/>} />
-        <Route path="/grafica" element={<Grafica   oscuro={oscuro} usuarios={usuarios} />} />
-       
       
      
 
