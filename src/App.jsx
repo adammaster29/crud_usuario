@@ -95,9 +95,6 @@ const home = ()=>{
          <HashRouter>
       <Routes>
         <Route path="/" element={ <Home setModal={setModal} modal={modal} abrirModal={abrirModal} oscuro={oscuro} actualizar={actualizar} usuarioSeleccionado={usuarioSeleccionado} seleccionar={seleccionar} eliminar={eliminar} agregar={agregar} usuarios={usuarios}/>} />
-      
-     
-
      </Routes>
     </HashRouter>
          </div>

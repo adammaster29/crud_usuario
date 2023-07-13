@@ -91,7 +91,6 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
     setmodalAmburguesa(!modalAmburguesa);
   }
 
-
   return (
     <div className="contenedor-padre">
       <div className="hijo">
@@ -148,12 +147,6 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
                       </div>
                     </div>
                   )}
-                </li>
-                <li className='li-responsive'>
-                  <i className="bx bx-stats"></i>
-                  <span onClick={navegar} className="notranslate">
-                    Stats
-                  </span>
                 </li>
                 <li className='li-responsive'>
                   <i className="bx bx-moon"></i>
