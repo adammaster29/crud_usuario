@@ -1,3 +1,4 @@
+import { Button } from 'bootstrap';
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { useForm } from 'react-hook-form';
@@ -7,19 +8,7 @@ const Home = ({ dark,setModal, modal, abrirModal, oscuro, usuarios, agregar, eli
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
-  // const submit = (data, e) => {
-  //   e.preventDefault();
-  //   data.id = Date.now().toString().substring(0, 2);
-
-
-  //   if (usuarioSeleccionado !== null) {
-  //     actualizar(data);
-  //     seleccionar(null); // Restablecer el usuario seleccionado después de actualizar
-  //   } else {
-  //     agregar(data);
-  //   }
-  //   reset();
-  // };
+  
   // Generar un identificador único de 2 caracteres
   const generateUniqueId = () => {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -94,7 +83,8 @@ const Home = ({ dark,setModal, modal, abrirModal, oscuro, usuarios, agregar, eli
 
   return (
     <div className="contenedor-padre">
-      <div className="hijo">
+      {modalAmburguesa &&(
+        <div className="hijo">
         <nav>
           <div className="menuResponsive">
             <img className='logo-img' src="img/logo.png" alt="" />
@@ -159,7 +149,15 @@ const Home = ({ dark,setModal, modal, abrirModal, oscuro, usuarios, agregar, eli
           </ul>
         </nav>
       </div>
+      )
+
+      }
       <div className="padre">
+        <div className="contenedor__btn">
+          <p>{modalAmburguesa?'':'Lista De Usuarios'}</p>
+          <p >{modalAmburguesa?'':'Agrega Tus Usuarios'}</p>
+         <button onClick={abrirAmburguesa}>menu</button>
+        </div>
         <div className="container-grafica">
           <div className="grafica uno-graf">
             <span className="usuario">Usuarios Ingresados</span>
