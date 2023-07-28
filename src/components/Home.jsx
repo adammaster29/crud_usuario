@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar, seleccionar, actualizar, usuarioSeleccionado }) => {
+const Home = ({ dark,setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar, seleccionar, actualizar, usuarioSeleccionado }) => {
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
@@ -97,69 +98,8 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
         <nav>
           <div className="menuResponsive">
             <img className='logo-img' src="img/logo.png" alt="" />
-            <button onClick={abrirAmburguesa} className='menu-amburguesa'>menu</button>
             {/* ******************************menu amburguesa********************************** */}
-            {modalAmburguesa && (
-              <ul className='ul-menuAmburguesa' >
-                <li className='li-responsive' onClick={home}>
-                  <i className="bx bx-home"></i>
-                  <span className="notranslate">Home</span>
-                </li>
-                <li className='li-responsive'>
-                  <i className="bx bx-user-plus"></i>
-                  <span onClick={abrirModal} className="notranslate">
-                    Add Users
-                  </span>
-                  {modal && (
-                    <div className="padre-modal">
-                      <div className="hijo-modal">
-                        <form onSubmit={handleSubmit(submit)}>
-                          <label className="notranslate" htmlFor="name">
-                            Nombre
-                          </label>
-                          <input type="text" id="name" {...register("name")} />
-
-                          <label className="notranslate" htmlFor="last_name">
-                            Apellidos
-                          </label>
-                          <input className="notranslate" type="text" id="last_name" {...register("last_name")} />
-
-                          <label className="notranslate" htmlFor="age">
-                            Edad
-                          </label>
-                          <input className="notranslate" type="number" id="age" {...register("age")} required />
-
-                          <label className="notranslate" htmlFor="email">
-                            Correo
-                          </label>
-                          <input className="notranslate" type="email" id="email" {...register("email")} />
-
-                          <label className="notranslate" htmlFor="movil">
-                            Movil
-                          </label>
-                          <input className="notranslate" type="number" id="movil" {...register("movil")} />
-
-                          <div className="notranslate enviar-cerrar">
-                            <input className="notranslate enviar" type="submit" value="Enviar" />
-                            <input onClick={() => setModal(false)} className="cerrar notranslate" type="submit" value="Cerrar" />
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  )}
-                </li>
-                <li className='li-responsive'>
-                  <i className="bx bx-moon"></i>
-                  <span onClick={oscuro} className="notranslate">
-                    Dark
-                  </span>
-                </li>
-              </ul>
-            )
-
-
-
-            }
+            
           </div>
           <ul className='ul-nav'>
             <li onClick={home}>
@@ -190,7 +130,7 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
                       </label>
                       <input className="notranslate" type="number" id="age" {...register("age")} required />
 
-                      <label className="notranslate" htmlFor="email">
+                      {/* <label className="notranslate" htmlFor="email">
                         Correo
                       </label>
                       <input className="notranslate" type="email" id="email" {...register("email")} />
@@ -198,7 +138,7 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
                       <label className="notranslate" htmlFor="movil">
                         Movil
                       </label>
-                      <input className="notranslate" type="number" id="movil" {...register("movil")} />
+                      <input className="notranslate" type="number" id="movil" {...register("movil")} /> */}
 
                       <div className="notranslate enviar-cerrar">
                         <input className="notranslate enviar" type="submit" value="Enviar" />
@@ -237,27 +177,28 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
           </div>
         </div>
         <div className="contenedor-tabla">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
+         
+           <Table  striped="columns">
+      <thead>
+      <tr >
+                <th >#</th>
                 <th>Nombre</th>
                 <th>Apellìdo</th>
                 <th>Edad</th>
-                <th>Correo</th>
-                <th>Movil</th>
+                {/* <th>Correo</th>
+                <th>Movil</th> */}
                 <th>Editar</th>
               </tr>
-            </thead>
-            <tbody>
-              {usuarios?.map(user => (
-                <tr key={user.id}>
+      </thead>
+      <tbody>
+      {usuarios?.map(user => (
+                <tr className="  text-center" key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.last_name}</td>
                   <td>{user.age}</td>
-                  <td className="correo">{user.email}</td>
-                  <td>{user.movil}</td>
+                  {/* <td className="correo">{user.email}</td>
+                  <td>{user.movil}</td> */}
                   <td className="btn-colores">
                     <i className=" bx bx-x eliminar" onClick={() => eliminar(user.id)}>
 
@@ -268,8 +209,8 @@ const Home = ({ setModal, modal, abrirModal, oscuro, usuarios, agregar, eliminar
                   </td>
                 </tr>
               ))}
-            </tbody>
-          </table>
+      </tbody>
+    </Table>
         </div>
       </div>
     </div>
