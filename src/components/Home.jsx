@@ -80,7 +80,11 @@ const Home = ({ dark,setModal, modal, abrirModal, oscuro, usuarios, agregar, eli
   const abrirAmburguesa = () => {
     setmodalAmburguesa(!modalAmburguesa);
   }
-
+const[buscador,setBuscador] = useState('')
+const buscar = () => {
+  return usuarios?.filter(user => user.name.toLowerCase().includes(buscador.toLowerCase()));
+};
+console.log(buscador)
   return (
     <div className="contenedor-padre">
       {modalAmburguesa &&(
@@ -155,7 +159,7 @@ const Home = ({ dark,setModal, modal, abrirModal, oscuro, usuarios, agregar, eli
       <div className="padre">
         <div className="contenedor__btn">
           <p>{modalAmburguesa?'':'Lista De Usuarios'}</p>
-          <p >{modalAmburguesa?'':'Agrega Tus Usuarios'}</p>
+          <input placeholder='Buscar Usuario' value={buscador} onChange={e => setBuscador(e.target.value)}  type="text" />
          <button onClick={abrirAmburguesa}>menu</button>
         </div>
         <div className="container-grafica">
@@ -189,7 +193,7 @@ const Home = ({ dark,setModal, modal, abrirModal, oscuro, usuarios, agregar, eli
               </tr>
       </thead>
       <tbody>
-      {usuarios?.map(user => (
+      {buscar()?.map(user => (
                 <tr className="  text-center" key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.name}</td>

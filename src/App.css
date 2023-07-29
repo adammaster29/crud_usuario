@@ -99,12 +99,12 @@ html,body{
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid #000;
   padding: 3px;
 }
 .hijo {
-  height: 670px;
+  max-height: 1000vh;
   width: 300px;
+
 }
 
 .navbar {
@@ -117,7 +117,8 @@ html,body{
 
 .contenedor-padre {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  border:1px solid;
   background: var(--bg-fondo-body);
   background-size: cover;
   background-repeat: no-repeat;
@@ -434,4 +435,10 @@ input {
   display: flex;
   height: 100%;
   flex-direction: column;
+}
+.contenedor__btn input{
+  min-width: 400px;
+  height: 30px;
+  text-align: center;
+  text-shadow: 2px 2px 2px rgb(80, 186, 53), 2px 2px 2px rgb(133, 133, 133);
 }
