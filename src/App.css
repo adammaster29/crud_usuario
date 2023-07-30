@@ -3,10 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
-html,body{
-  width: 100%;
-  height: 100%;
-}
+
 
 :root {
   --bg-fondo-body: #ffffff48;
@@ -102,8 +99,9 @@ html,body{
   padding: 3px;
 }
 .hijo {
-  max-height: 1000vh;
+  min-height: 100%;
   width: 300px;
+  box-shadow: 2px 2px 2px gray;
 
 }
 
@@ -157,11 +155,8 @@ nav {
   flex-direction: column;
   background: var(--bg-nav);
   width: 250px;
-  /* height: 100%; */
   display: flex;
   justify-content: center;
-  /* border: 1px solid #000; */
-  box-shadow: 2px 2px 3px gray;
 }
 
 ul {

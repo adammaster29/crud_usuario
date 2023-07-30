@@ -220,3 +220,10 @@ console.log(buscador)
 };
 
 export default Home;
+
+
+
+
+
+
+
